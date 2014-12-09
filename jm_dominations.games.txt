@@ -1,0 +1,22 @@
+"Games"
+{
+        "tf"
+        {
+                "Signatures"
+                {
+                        "SetNumberOfDominations"
+                        {
+                                "linux"         "@_ZN9CTFPlayer22SetNumberofDominationsEi"
+                        }
+                }
+
+                /*"Offsets"
+                {
+                        "SetNumberOfDominations"
+                        {
+                                "windows"       "449"
+                                "linux"         "450"
+                        }
+                }*/
+        }
+}

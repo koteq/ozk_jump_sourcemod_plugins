@@ -1,0 +1,14 @@
+"Phrases"
+{
+	"Superman Enabled"
+	{
+		"en"		"You are now the MAN OF STEEL"
+		"ru"		"Теперь ты ЧЕЛОВЕК ИЗ СТАЛИ"
+	}
+	
+	"Superman Disabled"
+	{
+		"en"		"You are now fragile like a girl"
+		"ru"		"Теперь ты слаб как девчонка"
+	}
+}

@@ -1,0 +1,8 @@
+"Phrases"
+{
+	"Health Regen Permanently Enabled"
+	{
+		"en"		"Health regeneration permanently enabled for everyone on this server"
+		"ru"		"На данном сервере регенерация здоровья включена всегда и для всех"
+	}
+}

@@ -1,0 +1,70 @@
+"Phrases"
+{
+
+//----------------- SAVE ERRORS
+
+	"save disabled"
+	{
+		"en"		"[JM] {olive}Sorry, plugin disabled"
+		"ru"		"[JM] {olive}Извините, плагин отключен"
+	}
+
+	"save temporaly disabled"
+	{
+		"en"		"[JM] {olive}Save function temporally unavailable"
+		"ru"		"[JM] {olive}Возможность сохранять позицию временно недоступна"
+	}
+
+	"on ground"
+	{
+		"en"		"[JM] {olive}You have to be on ground"
+		"ru"		"[JM] {olive}Необходимо стоять на поверхности земли"
+	}
+
+	"crouched"
+	{
+		"en"		"[JM] {olive}You can't save while you crouched"
+		"ru"		"[JM] {olive}Нельзя сохраняться сидя"
+	}
+
+//----------------- LOAD ERRORS
+
+	"load disabled"
+	{
+		"en"		"[JM] {olive}Sorry, plugin disabled"
+		"ru"		"[JM] {olive}Извините, плагин отключен"
+	}
+
+	"load temporaly disabled"
+	{
+		"en"		"[JM] {olive}Load function temporally unavailable"
+		"ru"		"[JM] {olive}Возможность загружать позицию временно недоступна"
+	}
+
+	"save not found for tag"
+    {
+        "#format"	"{1:s}"
+        "en"		"[JM] {olive}Save not found for tag {1}"
+        "ru"		"[JM] {olive}Сохранение для тега {1} не нейдено"
+    }
+
+    "save not found"
+	{
+        "en"		"[JM] {olive}You haven't saved your position"
+        "ru"		"[JM] {olive}Сохранение не найдено"
+    }
+
+//----------------- SUCCESS MSGS
+
+	"saved"
+	{
+		"en"		"[JM] Position saved"
+		"ru"		"[JM] Позиция сохранена"
+	}
+
+	"loaded"
+	{
+		"en"		"[JM] Position loaded"
+		"ru"		"[JM] Позиция загружена"
+	}
+}

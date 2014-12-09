@@ -1,0 +1,14 @@
+"Phrases"
+{
+	"Ammo Regen Enabled"
+	{
+		"en"		"Ammo clip regeneration enabled"
+		"ru"		"Включено пополнение патронов в обойме"
+	}
+	
+	"Ammo Regen Disabled"
+	{
+		"en"		"Ammo clip regeneration disabled"
+		"ru"		"Пополнение патронов в обойме отключено"
+	}
+}

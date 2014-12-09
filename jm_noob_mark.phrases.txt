@@ -1,0 +1,20 @@
+"Phrases"
+{
+	"Noob Mark Warning"
+	{
+		"en"		"{orangered}Some actions unavailable while you are marked as a cheater. To remove the mark use {lightblue}!unmark{orangered} command."
+		"ru"		"{orangered}Некоторые действия недоступны для мошенников. Напишите {lightblue}!unmark{orangered} и перестанете быть мошенником."
+	}
+	
+	"Noob Mark Activated"
+	{
+		"en"		"{orangered}You have been marked as a cheater. To remove the mark use {lightblue}!unmark{orangered} command."
+		"ru"		"{orangered}Вы стали мошенником. Напишите {lightblue}!unmark{orangered} и перестанете им быть."
+	}
+	
+	"Noob Mark Deactivated"
+	{
+		"en"		"{orangered}Now your conscience is clear"
+		"ru"		"{orangered}Теперь ваша совесть чиста"
+	}
+}

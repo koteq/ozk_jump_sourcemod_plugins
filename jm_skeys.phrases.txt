@@ -1,0 +1,20 @@
+"Phrases"
+{	
+	"Showkeys_On"
+	{
+		"en"		"Keys will now be displayed on your hud."
+		"ru"		"Включено отображение нажимаемых кнопок."
+	}
+	
+	"Showkeys_Off"
+	{
+		"en"		"Keys will no longer be displayed on your hud."
+		"ru"		"Отображение нажимаемых кнопок отключено."
+	}
+
+	"ShowKeys_SpecOnly"
+	{
+		"en"		"You have to be a spectator to use this command."
+		"ru"		"Для использования этой команды вы должны быть наблюдателем."
+	}
+}
