@@ -61,7 +61,7 @@ public Action:OnClientSayCommand(client, const String:command[], const String:sA
 
 public JM_NoobMark_OnBeforeActivate(client)
 {
-    RemoveMiniClip(client, false);
+    RemoveMiniClip(client, true);
 }
 
 public JM_NoobMark_OnBeforeDeactivate(client)
