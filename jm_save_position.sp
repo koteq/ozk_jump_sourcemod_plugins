@@ -30,7 +30,7 @@ enum Sounds {
 };
 new String:g_Sounds[Sounds][32] = {
 	"items/spawn_item.wav",
-	"vo/engineer_no01.wav",
+	"vo/engineer_no01.mp3",
 	"ui/hint.wav"
 };
 

@@ -12,7 +12,7 @@ public Plugin:myinfo =
 };
 
 #define ENT_TIMER_NAME "hud_timeleft_timer"
-#define ENDS_IN_5MIN "vo/announcer_ends_5min.mp3"
+#define ENDS_IN_5MIN "vo/announcer_ends_5min.wav"
 
 new Handle:g_hTimerAnnonce5Min = INVALID_HANDLE;
 
