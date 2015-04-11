@@ -1,2 +1,5 @@
 *.smx
-.check_list.txt
+/.check_list.txt
+/chat_test.psd
+/chat_test.url
+/wtest.sp
