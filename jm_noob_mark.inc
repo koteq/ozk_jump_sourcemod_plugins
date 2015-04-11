@@ -65,5 +65,8 @@ public SharedPlugin:__pl_jm_noob_mark =
 
 public __pl_jm_noob_mark_SetNTVOptional()
 {
-
+    MarkNativeAsOptional("JM_NoobMark_IsActive");
+    MarkNativeAsOptional("JM_NoobMark_PrintWarning");
+    MarkNativeAsOptional("JM_NoobMark_Activate");
+    MarkNativeAsOptional("JM_NoobMark_Deactivate");
 }

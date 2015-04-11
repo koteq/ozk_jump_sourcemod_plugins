@@ -27,4 +27,3 @@ public __pl_jm_dominations_SetNTVOptional()
 {
 	MarkNativeAsOptional("SetNumberOfDominations");
 }
-

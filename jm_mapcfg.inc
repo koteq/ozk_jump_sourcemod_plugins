@@ -26,5 +26,5 @@ public SharedPlugin:__pl_jm_mapcfg =
 
 public __pl_jm_mapcfg_SetNTVOptional()
 {
-
+    MarkNativeAsOptional("JM_MapConfig_GetMapPlayerClass");
 }
