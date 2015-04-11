@@ -17,6 +17,10 @@ public Plugin:myinfo = {
 #define SPECMODE_3RDPERSON   5
 #define SPECMODE_FREELOOK    6
 
+#define HUD_REDRAW_INTERVAL 1.0
+
+#define HIDE_ADMINS_WITH_FLAG Admin_Ban
+
 new bool:g_bShowSpecList[MAXPLAYERS + 1];
 new Handle:g_hCookieSpecList = INVALID_HANDLE;
 new Handle:g_hHudSynchronizer = INVALID_HANDLE;
@@ -26,7 +30,7 @@ public OnPluginStart()
 	RegConsoleCmd("sm_speclist", Command_SpecList, "Toggle showing a spectators list");
 	g_hHudSynchronizer = CreateHudSynchronizer();
 	g_hCookieSpecList = RegClientCookie("jm_speclist", "Show spectators list", CookieAccess_Public);
-	CreateTimer(1.0, Timer_RedrawSpecList, _, TIMER_REPEAT);
+	CreateTimer(HUD_REDRAW_INTERVAL, Timer_RedrawSpecList, _, TIMER_REPEAT);
 }
 
 public OnClientConnected(client)
@@ -110,10 +114,9 @@ public Action:Timer_RedrawSpecList(Handle:timer)
 		for (observer = 1; observer <= MaxClients; observer++) {
 			if (!IsClientInGame(observer) ||
 				!IsClientObserver(observer) ||
-				IsAdmin(observer, Admin_Ban) ||
+				IsAdmin(observer, HIDE_ADMINS_WITH_FLAG) ||
 				observer == client
 			) {
-				//PrintToMe("observer s1 %N", observer);
 				continue;
 			}
 			observer_target = GetObserverTarget(observer);
