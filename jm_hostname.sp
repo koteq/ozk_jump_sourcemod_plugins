@@ -64,9 +64,9 @@ UpdateHostname()
 	
 	decl String:hostname[256];
 	if (timeleft && strlen(g_sMapInfo)) {
-		Format(hostname, sizeof(hostname), "%s [%s, %d:%02d left]", HOSTNAME_PREFIX, g_sMapInfo, (timeleft / 60), (timeleft % 60));
+		Format(hostname, sizeof(hostname), "%s [%s, %d min left]", HOSTNAME_PREFIX, g_sMapInfo, (timeleft / 60));
 	} else if (timeleft && !strlen(g_sMapInfo)) {
-		Format(hostname, sizeof(hostname), "%s [%d:%02d left]", HOSTNAME_PREFIX, (timeleft / 60), (timeleft % 60));
+		Format(hostname, sizeof(hostname), "%s [%d min left]", HOSTNAME_PREFIX, (timeleft / 60));
 	} else if (!timeleft && strlen(g_sMapInfo)) {
 		Format(hostname, sizeof(hostname), "%s [%s]", HOSTNAME_PREFIX, g_sMapInfo);
 	} else {
