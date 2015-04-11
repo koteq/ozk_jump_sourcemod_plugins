@@ -14,6 +14,9 @@ public Plugin:myinfo =
     description = "Mark cheating players as noobs"
 };
 
+//#define YOU_WERE_ALWAYS_A_DISAPPOINTMENT "vo/announcer_am_lastmanforfeit02.mp3"
+#define YOU_DISGUST_ME "vo/announcer_am_lastmanforfeit04.mp3"
+
 new Handle:g_hOnBeforeActivateNoobMarkForward = INVALID_HANDLE;
 new Handle:g_hOnBeforeDeactivateNoobMarkForward = INVALID_HANDLE;
 
@@ -34,6 +37,7 @@ public OnMapStart()
     for (new client = 0; client < MaxClients + 1; client++) {
         g_bNoobMark[client] = false;
     }
+    PrecacheSound(YOU_DISGUST_ME);
 }
 
 public OnClientConnected(client)
@@ -114,6 +118,7 @@ MarkClientAsNoob(client)
         Entity_GetAbsVelocity(client, g_vClientVelocity[client]);
         
         CPrintToChat(client, "[JM] %t", "Noob Mark Activated");
+        EmitSoundToClient(client, YOU_DISGUST_ME, SOUND_FROM_PLAYER, SNDCHAN_VOICE, SNDLEVEL_NORMAL);
     }
 }
 
@@ -126,6 +131,7 @@ UnmarkClientAsNoob(client, bool:resetPosition)
         
         if (resetPosition) {
             if (g_ClientTeam[client] == GetClientTeam(client)) {
+                DestroyClientProjectiles(client);
                 TeleportEntity(client, g_vClientOrigin[client], g_vClientAngles[client], g_vClientVelocity[client]);
             }
             else {
