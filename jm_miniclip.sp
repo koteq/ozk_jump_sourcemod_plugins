@@ -95,21 +95,28 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 
 public Action:Command_MiniClip(client, args)
 {
-    if (g_bMiniClipEnabled[client]) {
-        RemoveMiniClip(client, true);
-        ReplyToCommand(client, "Mini-clip deactivated");
-    } else {
-        AddMiniClip(client);
-        ReplyToCommand(client, "Mini-clip activated for 10 seconds");
+    new entity_flags = GetEntityFlags(client);
+    new bool:cronching_on_ground = (entity_flags & FL_ONGROUND) && (entity_flags & FL_DUCKING);
+    
+    if (IsPlayerAlive(client) && !cronching_on_ground) {
+        if (!g_bMiniClipEnabled[client]) {
+            AddMiniClip(client);
+            ReplyToCommand(client, "Mini-clip activated for 10 seconds");
+        }
+        else {
+            RemoveMiniClip(client, true);
+            ReplyToCommand(client, "Mini-clip deactivated");
+        }
+    }
+    else {
+        ReplyToCommand(client, "Mini-clip unavailable at the moment");
     }
     return Plugin_Handled;
 }
 
 public Action:Timer_RemoveMiniClip(Handle:timer, any:client)
 {
-    if (g_bMiniClipEnabled[client]) {
-        RemoveMiniClip(client, true);
-    }
+    RemoveMiniClip(client, true);
 }
 
 public Action:Timer_RemoveMovementBlock(Handle:timer, any:client)
@@ -137,19 +144,21 @@ AddMiniClip(client)
 
 RemoveMiniClip(client, bool:teleport_back)
 {
-    g_bMiniClipEnabled[client] = false;
-    
-    new flags = GetEntityFlags(client);
-    flags &= ~FL_FLY;
-    flags &= ~FL_NOTARGET;
-    flags &= ~FL_DONTTOUCH;
-    
-    if (teleport_back) {
-        flags |= FL_FROZEN;
-        CreateTimer(0.5, Timer_RemoveMovementBlock, client);
-        TeleportEntity(client, g_vClientOrigin[client], g_vClientAngles[client], g_vClientVelocity[client]);
+    if (g_bMiniClipEnabled[client]) {
+        g_bMiniClipEnabled[client] = false;
+        
+        new flags = GetEntityFlags(client);
+        flags &= ~FL_FLY;
+        flags &= ~FL_NOTARGET;
+        flags &= ~FL_DONTTOUCH;
+        
+        if (teleport_back) {
+            flags |= FL_FROZEN;
+            CreateTimer(0.5, Timer_RemoveMovementBlock, client);
+            TeleportEntity(client, g_vClientOrigin[client], g_vClientAngles[client], g_vClientVelocity[client]);
+        }
+        
+        SetEntityFlags(client, flags);
+        SetEntityMoveType(client, MOVETYPE_WALK);
     }
-    
-    SetEntityFlags(client, flags);
-    SetEntityMoveType(client, MOVETYPE_WALK);
 }
