@@ -90,16 +90,20 @@ public Action:OnClientSayCommand(client, const String:command[], const String:ar
 		StrEqual(arg1, "/regen") ||
 		StrEqual(arg1, "regen")
 	) {
-		decl String:arg2[4];
-		BreakString(text[pos], arg2, sizeof(arg2));
-		
-		if (StrEqual(arg2, "on")) {
-			g_bRefillClip[client] = true;
+		if (pos != -1) {
+			decl String:arg2[4];
+			BreakString(text[pos], arg2, sizeof(arg2));
+			if (StrEqual(arg2, "on")) {
+				g_bRefillClip[client] = true;
+			}
+			if (StrEqual(arg2, "off")) {
+				g_bRefillClip[client] = false;
+			}
 		}
-		if (StrEqual(arg2, "off")) {
-			g_bRefillClip[client] = false;
+		else {
+			g_bRefillClip[client] = !g_bRefillClip[client];
 		}
-	
+
 		if (g_bRefillClip[client]) {
 			if (g_bLibrary_JmNoobMark && !IsClientAllowedToUseAmmo(client)) {
 				JM_NoobMark_Activate(client);
