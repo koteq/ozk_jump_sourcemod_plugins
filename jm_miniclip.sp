@@ -83,10 +83,14 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 
 public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:angles[3], &weapon)
 {
-    if (g_bMiniClipEnabled[client]) {
+    if (g_bMiniClipEnabled[client] &&
+        ((buttons | IN_ATTACK) || (buttons | IN_ATTACK2))
+    ) {
         buttons &= ~IN_ATTACK;
         buttons &= ~IN_ATTACK2;
 
+        RemoveMiniClip(client, true);
+        
         return Plugin_Changed;
     } 
     
@@ -154,7 +158,7 @@ RemoveMiniClip(client, bool:teleport_back)
         
         if (teleport_back) {
             flags |= FL_FROZEN;
-            CreateTimer(0.5, Timer_RemoveMovementBlock, client);
+            CreateTimer(0.4, Timer_RemoveMovementBlock, client);
             TeleportEntity(client, g_vClientOrigin[client], g_vClientAngles[client], g_vClientVelocity[client]);
         }
         
