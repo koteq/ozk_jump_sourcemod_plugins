@@ -84,7 +84,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:angles[3], &weapon)
 {
     if (g_bMiniClipEnabled[client] &&
-        ((buttons | IN_ATTACK) || (buttons | IN_ATTACK2))
+        ((buttons & IN_ATTACK) || (buttons & IN_ATTACK2))
     ) {
         buttons &= ~IN_ATTACK;
         buttons &= ~IN_ATTACK2;
