@@ -44,11 +44,17 @@ public JA_OnClientCapturedPoint(client, areaId, const String:areaName[])
 
         new role = int:TF2_GetPlayerClass(client);
 
+        decl String:nameSafe[64];
+        SQL_EscapeString(g_hDatabase, name, nameSafe, sizeof(nameSafe));
+
+        decl String:areaNameSafe[64];
+        SQL_EscapeString(g_hDatabase, areaName, areaNameSafe, sizeof(areaNameSafe));
+
         decl String:query[255];
         Format(query, sizeof(query),
-                "CALL playerCapturedPoint(%s, %s, %d, %s, %d, %s);", 
-                steamId, name, role, mapName, areaId, areaName);
-        
+            "CALL playerCapturedPoint('%s', '%s', %d, '%s', %d, '%s');",
+            steamId, nameSafe, role, mapName, areaId, areaNameSafe);
+
         SQL_TQuery(g_hDatabase, SQL_OnQueryExecuted, query);
     }
 }
