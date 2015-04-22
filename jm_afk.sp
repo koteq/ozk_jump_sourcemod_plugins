@@ -1,9 +1,6 @@
 #pragma semicolon 1
 
 #include <sourcemod>
-#include <sdktools>
-#include <tf2>
-#include <tf2_stocks>
 #include <jm_stocks>
 
 #undef REQUIRE_PLUGIN
@@ -29,7 +26,7 @@ public Action:Timer_CheckPlayerTeam(Handle:timer, any:userid)
 {
     new client = GetClientOfUserId(userid);
 
-    if (IsClientInGame(client) &&
+    if (IsValidClient(client) &&
         IsClientUnassigned(client) &&
         !IsClientSourceTV(client) &&
         !IsClientReplay(client)
