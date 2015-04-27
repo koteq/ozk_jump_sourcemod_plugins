@@ -13,11 +13,14 @@ public Plugin:myinfo = {
     version = "1.0"
 };
 
+#define RANKS_URL "http://cs.ozerki.net/files/tf2/tfjump_motd/top.php"
+
 new Handle:g_hDatabase = INVALID_HANDLE;
 
 public OnPluginStart()
 {
     SQL_TConnect(SQL_OnConnect, "jm_ranks");
+    RegConsoleCmd("sm_top", Command_Top, "Shows top jumpers page.");
 }
 
 public SQL_OnConnect(Handle:owner, Handle:hndl, const String:error[], any:data)
@@ -28,6 +31,12 @@ public SQL_OnConnect(Handle:owner, Handle:hndl, const String:error[], any:data)
     else {
         SetFailState("Connection failed: %s", error);
     }
+}
+
+public Action:Command_Top(client, args)
+{
+    ShowMOTDPanel(client, "Jump Top", RANKS_URL, MOTDPANEL_TYPE_URL);
+    return Plugin_Handled;
 }
 
 public JA_OnClientCapturedPoint(client, areaId, const String:areaName[])
