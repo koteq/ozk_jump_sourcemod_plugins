@@ -1,14 +1,20 @@
 "Phrases"
 {
-	"Ammo Regen Enabled"
-	{
-		"en"		"Ammo clip regeneration enabled"
-		"ru"		"Включено пополнение патронов в обойме"
-	}
-	
-	"Ammo Regen Disabled"
-	{
-		"en"		"Ammo clip regeneration disabled"
-		"ru"		"Пополнение патронов в обойме отключено"
-	}
+    "Ammo Regen Enabled"
+    {
+        "en"        "Ammo clip regeneration enabled"
+        "ru"        "Включён режми бесконечной обоймы патронов"
+    }
+    
+    "Ammo Regen Disabled"
+    {
+        "en"        "Ammo clip regeneration disabled"
+        "ru"        "Режим бесконечной обоймы отключен"
+    }
+
+    "Ammo Not Allowed"
+    {
+        "en"        "Ammo regen are not allowed for your class, sorry"
+        "ru"        "Режим бесконечной обоймы запрещён для выбранного вами класса"
+    }
 }
