@@ -3,16 +3,15 @@
 #include <sourcemod>
 #include <sdktools>
 
-#include "dev.inc"
-
 public Plugin:myinfo = {
     name = "JM Point",
     author = "Reflex",
-    description = "Ranks for players",
+    description = "Additional control points to any map",
     version = "1.0"
 };
 
 #define TRIGGER_NAME_PREFIX "_jm_point_"
+#define MODEL_HOLOGRAM "models/effects/cappoint_hologram.mdl"
 #define MODEL_POINT_BASE "models/props_gameplay/cap_point_base.mdl"
 #define MODEL_POINT_BASE_SMALL "models/props_doomsday/cap_point_small.mdl"
 
@@ -62,6 +61,7 @@ public OnPluginEnd()
 
 public OnMapStart()
 {
+    PrecacheModel(MODEL_HOLOGRAM);
     PrecacheModel(MODEL_POINT_BASE);
     PrecacheModel(MODEL_POINT_BASE_SMALL);
 }
@@ -196,10 +196,12 @@ CreateControlPoint(const Float:origin[3], ControlPointType:type = ControlPointTy
 {
     switch (type) {
         case ControlPointType_Default: {
+            CreateHologram(origin);
             CreateControlPointBase(origin);
             return CreateTrigger(origin);
         }
         case ControlPointType_Small: {
+            CreateHologram(origin);
             CreateControlPointBase(origin, true);
             return CreateTrigger(origin, true);
         }
@@ -235,9 +237,9 @@ CreateTrigger(const Float:origin[3], bool:small = false)
         DispatchKeyValue(trigger, "targetname", sTargetName);
 
         DispatchKeyValue(trigger, "spawnflags", "1");  // clients can touch
+        TeleportEntity(trigger, origin, NULL_VECTOR, NULL_VECTOR);
         DispatchSpawn(trigger);
         ActivateEntity(trigger);
-        TeleportEntity(trigger, origin, NULL_VECTOR, NULL_VECTOR);
 
         // magic stright ahead
         // details here https://forums.alliedmods.net/showthread.php?t=129597
@@ -269,6 +271,25 @@ CreateTrigger(const Float:origin[3], bool:small = false)
     return -1;
 }
 
+CreateHologram(const Float:origin[3])
+{
+    new holo = CreateEntityByName("prop_dynamic");
+
+    if (holo != -1) {
+        SetEntityModel(holo, MODEL_HOLOGRAM);
+        DispatchKeyValue(holo, "disableshadows", "1");
+        DispatchKeyValue(holo, "disablereceiveshadows", "1");
+        DispatchKeyValue(holo, "spawnflags", "256");  // start with collision disabled
+        TeleportEntity(holo, origin, NULL_VECTOR, NULL_VECTOR);
+        DispatchSpawn(holo);
+
+        SetVariantString("idle");
+        AcceptEntityInput(holo , "SetAnimation", -1, -1, 0); 
+    }
+
+    return holo;
+}
+
 CreateControlPointBase(const Float:origin[3], bool:small = false)
 {
     new base = CreateEntityByName("prop_dynamic");
@@ -283,8 +304,9 @@ CreateControlPointBase(const Float:origin[3], bool:small = false)
         DispatchKeyValue(base, "disableshadows", "1");
         DispatchKeyValue(base, "disablereceiveshadows", "1");
         DispatchKeyValue(base, "spawnflags", "256");  // start with collision disabled
-        DispatchSpawn(base);
+        DispatchKeyValue(base, "skin", "2");  // 1 red, 2 blue
         TeleportEntity(base, origin, NULL_VECTOR, NULL_VECTOR);
+        DispatchSpawn(base);
     }
 
     return base;
