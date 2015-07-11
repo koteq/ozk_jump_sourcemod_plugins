@@ -17,9 +17,9 @@ public Plugin:myinfo = {
     version = "1.0"
 };
 
+#define KEEP_CRYING_BABY "vo/taunts/heavy_taunts05.mp3"
+
 new bool:g_bRefillClip[MAXPLAYERS + 1];
-new g_iClientPrimaryWeapon[MAXPLAYERS + 1];
-new g_iClientSecondaryWeapon[MAXPLAYERS + 1];
 
 new bool:g_bLibrary_JmMapcfg;
 
@@ -27,17 +27,11 @@ public OnPluginStart()
 {
     RegConsoleCmd("sm_ammo", Command_Ammo, "Toggle ammo clip regen");
 
-    HookEvent("post_inventory_application", Event_PostInventoryApplication, EventHookMode_Post);
     HookEvent("player_changeclass", Event_PlayerChangeClass);
 
     CreateTimer(1.0, Timer_RegenAmmo, _, TIMER_REPEAT);
 
     LoadTranslations("jm_ammo.phrases");
-
-    // late load
-    for (new client = 1; client <= MaxClients; client++) {
-        UpdateClientWeapons(client);
-    }
 }
 
 public OnAllPluginsLoaded()
@@ -59,6 +53,11 @@ public OnLibraryRemoved(const String:name[])
     }
 }
 
+public OnMapStart()
+{
+    PrecacheSound(KEEP_CRYING_BABY);
+}
+
 public OnClientDiconnect(client)
 {
     g_bRefillClip[client] = false;
@@ -67,12 +66,6 @@ public OnClientDiconnect(client)
 public JM_NoobMark_OnBeforeDeactivate(client)
 {
     g_bRefillClip[client] = false;
-}
-
-public Action:Event_PostInventoryApplication(Handle:event, const String:name[], bool:dontBroadcast)
-{
-    new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    UpdateClientWeapons(client);
 }
 
 public Action:Event_PlayerChangeClass(Handle:event, const String:name[], bool:dontBroadcast)
@@ -98,6 +91,7 @@ public Action:Command_Ammo(client, args)
     }
     else {
         ReplyToCommand(client, "[JM] %t", "Ammo Not Allowed");
+        EmitSoundToClient(client, KEEP_CRYING_BABY, SOUND_FROM_PLAYER, SNDCHAN_VOICE, SNDLEVEL_NORMAL);
     }
     
     return Plugin_Handled;
@@ -126,18 +120,10 @@ public Native_RegenClientAmmo(Handle:plugin, numParams)
     RegenClientAmmo(GetNativeCell(1), bool:GetNativeCell(2));
 }
 
-UpdateClientWeapons(client)
-{
-    if (IsValidClient(client)) {
-        g_iClientPrimaryWeapon[client] = GetPlayerWeaponSlot(client, 0);
-        g_iClientSecondaryWeapon[client] = GetPlayerWeaponSlot(client, 1);
-    }
-}
-
 RegenClientAmmo(client, bool:clip_regen = false)
 {
-    RegenClientWeaponAmmo(client, g_iClientPrimaryWeapon[client], clip_regen);
-    RegenClientWeaponAmmo(client, g_iClientSecondaryWeapon[client], clip_regen);
+    RegenClientWeaponAmmo(client, GetPlayerWeaponSlot(client, 0), clip_regen);
+    RegenClientWeaponAmmo(client, GetPlayerWeaponSlot(client, 1), clip_regen);
 }
 
 RegenClientWeaponAmmo(client, weapon, bool:clip_regen)
