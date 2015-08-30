@@ -28,6 +28,7 @@ new Handle:g_hSkeysHudSynchronizer = INVALID_HANDLE;
 
 public OnPluginStart()
 {
+	LoadTranslations("jm_skeys.phrases");
 	RegConsoleCmd("sm_skeys", Command_ShowKeys, "Toggle showing a clients keys");
 	g_hSkeysHudSynchronizer = CreateHudSynchronizer();
 	g_hCookieSkeys = RegClientCookie("jm_skeys", "Show keys pressed by observed player", CookieAccess_Public);
@@ -82,7 +83,7 @@ public CookieMenuHandler(client, CookieMenuAction:action, any:info, String:buffe
 public Action:Command_ShowKeys(client, args)
 {
 	if (!IsClientObserver(client)) {
-		ReplyToCommand(client, "[JM] %t", "Showkeys_SpecOnly");
+		ReplyToCommand(client, "[JM] %t", "Showkeys_OnlyForSpectators");
 		return Plugin_Handled;
 	}
 	if (g_bShowHudKeys[client]) {
