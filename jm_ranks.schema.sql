@@ -1,3 +1,11 @@
+CREATE TABLE `maps` (
+  name varchar(64) NOT NULL,
+  team enum('red','blu','both') NOT NULL,
+  role enum('soldier','demoman') NOT NULL,
+  difficulty enum('v.easy','easy','medium','multistage','hard','expert','insane') NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE players (
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   steamId varchar(32) NOT NULL,
@@ -27,8 +35,7 @@ CREATE TABLE points (
   map varchar(64) NOT NULL,
   areaId tinyint(4) NOT NULL,
   areaName varchar(64) NOT NULL,
-  scoreSoldier float NOT NULL DEFAULT '0',
-  scoreDemoman float NOT NULL DEFAULT '0',
+  score float unsigned NOT NULL DEFAULT '0',
   capsSoldier int(10) unsigned NOT NULL DEFAULT '0',
   capsDemoman int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (id),
@@ -62,6 +69,19 @@ BEGIN
     INSERT INTO pointCaps (playerId, playerRole, pointId) VALUES (_playerId, 'demoman', _pointId)
     ON DUPLICATE KEY UPDATE capsCount = capsCount + 1, lastCap = CURRENT_TIMESTAMP;
   END IF;
+END
+;;
+DELIMITER ;
+
+DELIMITER ;;
+CREATE FUNCTION steam32ToCommunityId(_steamId VARCHAR(64)) RETURNS bigint(64)
+BEGIN
+	DECLARE _authServer INT;
+	DECLARE _authId INT;
+
+	SET _authServer = CAST(SUBSTR(_steamId, 9, 1) AS UNSIGNED INTEGER);
+	SET _authId = CAST(SUBSTR(_steamId, 11) AS UNSIGNED INTEGER);
+	RETURN 76561197960265728 + (_authId * 2) + _authServer;
 END
 ;;
 DELIMITER ;

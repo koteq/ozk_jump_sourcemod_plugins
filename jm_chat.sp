@@ -10,7 +10,9 @@ public Plugin:myinfo = {
     version = "1.0"
 };
 
-// notice: OnChatMessage will get called for every recipient (multiple times)
+// NOTICE: this callback MAY be called MULTIPLE times (may not)
+//         for EVERY player on the server even for the author himself
+// NOTICE: it's imposible to send message from within this hook
 public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:message[])
 {
     new flags = GetMessageFlags();
@@ -24,9 +26,13 @@ public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:me
 
             // we must change only one message to prevent message dublications
             // lets change the one adressed to it's author
-            if (FindValueInArray(recipients, author) != -1) {
+            if (InArray(recipients, author)) {
                 for (new client = 1; client <= MaxClients; client++) {
-                    if (IsClientInGame(client) && IsPlayerAlive(client)) {
+                    if (
+                        IsClientInGame(client) &&
+                        IsPlayerAlive(client) &&
+                        !InArray(recipients, client)
+                    ) {
                         PushArrayCell(recipients, client);
                     }
                 }
@@ -37,4 +43,9 @@ public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:me
     }
 
     return Plugin_Continue;
+}
+
+stock bool:InArray(Handle:array, any:item)
+{
+    return FindValueInArray(array, item) != -1;
 }

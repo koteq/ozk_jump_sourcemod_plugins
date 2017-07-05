@@ -31,7 +31,7 @@ public Action:Timer_CheckPlayerTeam(Handle:timer, any:userid)
         !IsClientSourceTV(client) &&
         !IsClientReplay(client)
     ) {
-        KickClient(client, "AFK");
+        KickClient(client, "Kicked due to inactivity");
     }
 }
 

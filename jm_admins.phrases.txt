@@ -1,0 +1,29 @@
+"Phrases"
+{
+    "Admins Count Zero"
+    {
+        "en"        "There are no admins online"
+        "ru"        "Сейчас на сервере админов нет"
+    }
+
+    "Admins Count One"
+    {
+        "#format"   "{1:i}"
+        "en"        "There is {1} admin online"
+        "ru"        "Сейчас на сервере {1} админ"
+    }
+    
+    "Admins Count Two"
+    {
+        "#format"   "{1:i}"
+        "en"        "There are {1} admins online"
+        "ru"        "Сейчас на сервере {1} админа"
+    }
+
+    "Admins Count Five"
+    {
+        "#format"   "{1:i}"
+        "en"        "There are {1} admins online"
+        "ru"        "Сейчас на сервере {1} админов"
+    }
+}

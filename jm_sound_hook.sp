@@ -20,7 +20,8 @@ public Action:SoundHook(clients[64], &numClients, String:sample[PLATFORM_MAX_PAT
 {
 	if (StrEqual(sample, "items/regenerate.wav", false) ||
 	    StrEqual(sample, "items/ammo_pickup.wav", false) ||
-	    StrContains(sample, "_painsevere", false) != -1
+	    StrContains(sample, "_painsevere", false) != -1 ||
+	    StrContains(sample, "_painsharp", false) != -1
 	) {
 		numClients = 0;
 		return Plugin_Changed;

@@ -43,7 +43,7 @@ public Action:Command_Noclip(client, args)
 {
 	if (args < 1) {
 		ToggleNoclip(client);
-		ShowActivity2(client, "[SM] ", "Toggle Noclip to self");
+		ShowActivity2(client, "[SM] ", "Toggle Noclip to %N", client);
 		
 		return Plugin_Handled;
 	}

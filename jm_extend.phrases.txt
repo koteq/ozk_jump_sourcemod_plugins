@@ -1,0 +1,22 @@
+"Phrases"
+{
+    "Extends timelimit"
+    {
+        "#format"   "{1:i}"
+        "en"        "Extends timelimit by {1} minutes"
+        "ru"        "Продлил время карты на {1} минут"
+    }
+
+    "Reduces timelimit"
+    {
+        "#format"   "{1:i}"
+        "en"        "Reduces timelimit by {1} minutes"
+        "ru"        "Сократил время карты на {1} минут"
+    }
+
+    "Extension Limit Reached"
+    {
+        "en"        "Map timelimit cannot be extended anymore"
+        "ru"        "Достигнут лимит по продлению времени карты"
+    }
+}

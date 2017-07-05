@@ -12,7 +12,7 @@
 		"ru"		"Отображение нажимаемых кнопок отключено."
 	}
 
-	"Showkeys_SpecOnly"
+	"Showkeys_OnlyForSpectators"
 	{
 		"en"		"You have to be a spectator to use this command."
 		"ru"		"Для использования этой команды вы должны быть наблюдателем."

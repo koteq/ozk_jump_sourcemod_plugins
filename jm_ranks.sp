@@ -27,6 +27,7 @@ public SQL_OnConnect(Handle:owner, Handle:hndl, const String:error[], any:data)
 {
     if (hndl != INVALID_HANDLE) {
         g_hDatabase = hndl;
+        SQL_SetCharset(g_hDatabase, "utf8");
     }
     else {
         SetFailState("Connection failed: %s", error);
